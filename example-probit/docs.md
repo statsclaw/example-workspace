@@ -1,50 +1,87 @@
 # Documentation Summary
 
-## Run
-20260331-interflex-py-224717
+```yaml
+RequestID: REQ-20260331-223247
+Pipeline: Scriber (recording mode, workflow 11)
+Status: COMPLETE
+```
 
-## Documentation Files
+---
 
-No separate user-facing documentation files were modified or created beyond the source code docstrings and ARCHITECTURE.md. The package is a new creation, and all public functions include comprehensive docstrings.
+## Documentation Artifacts Produced
 
-### Existing Documentation
+### 1. ARCHITECTURE.md (target repo root + run directory)
 
-| File | Status | Description |
+Written to both:
+- `/Users/tianzhuqin/Documents/Github/statsclaw/statsclaw/.repos/example-probit/ARCHITECTURE.md`
+- `/Users/tianzhuqin/Documents/Github/statsclaw/statsclaw/.repos/workspace/example-probit/runs/REQ-20260331-223247/ARCHITECTURE.md`
+
+Contents:
+- **Overview**: Package purpose, language, dependencies
+- **Module Structure**: Mermaid graph TD with 5 subgraph layers (R API, C++ Core, Utils, Simulation, Rcpp Binding) and module reference table (12 entries)
+- **Function Call Graph**: Mermaid graph TD tracing public entry points (probit_mle, probit_gibbs, probit_mh) to internal helpers (safe_log_Phi, safe_Phi, rtruncnorm, log_posterior) and Armadillo operations. Function reference table (7 entries)
+- **Data Flow**: Mermaid graph TD with decision diamonds for method dispatch, convergence check, accept/reject, and burn-in gating. Three parallel branches (MLE, Gibbs, MH)
+- **Mathematical Foundations**: Model definition, MLE Newton-Raphson, Gibbs Albert-Chib, MH random-walk
+- **Simulation Study Design**: DGP, grid, metrics, seed strategy, key results summary
+- **Build and Usage**: Code examples for installation and quick usage
+- **Architectural Patterns**: 6 patterns documented (Rcpp export pattern, shared header, MLE warm-start, precomputed Cholesky, log-space arithmetic, sqrt-weighted cross-product)
+- **Notes**: MH scale change, no convergence diagnostics, simulation runtime, undercoverage observation
+
+### 2. log-entry.md (run directory)
+
+Written to: `/Users/tianzhuqin/Documents/Github/statsclaw/statsclaw/.repos/workspace/example-probit/runs/REQ-20260331-223247/log-entry.md`
+
+Filename header: `<!-- filename: 2026-03-31-probit-package-greenfield.md -->`
+
+Contents:
+- **What Changed**: Greenfield package summary
+- **Files Changed**: 29 files listed with action and description
+- **Process Record**:
+  - Proposal: spec.md (3 estimators, utilities, scaffold), test-spec.md (C1-C7 criteria), sim-spec.md (DGP, grid, metrics)
+  - Implementation Notes: key builder decisions (sqrt trick, abs guard, forward declaration)
+  - Validation Results: full per-test result table (173/173 PASS), before/after comparison (scale 1.0 vs 2.4), simulation results (bias, RMSE, coverage, time, acceptance rate tables), convergence diagnostics, acceptance criteria summary (C1-C7 all PASS)
+  - Problems: 4 issues documented (1 BLOCK signal for C3, 3 test infrastructure fixes)
+  - Review Summary: pending (reviewer follows scriber)
+- **Design Decisions**: 6 decisions with rationale
+- **Handoff Notes**: 6 items for next developer
+
+### 3. docs.md (this file, run directory)
+
+Summary of all documentation artifacts produced.
+
+---
+
+## Existing Package Documentation Status
+
+All roxygen2 documentation was produced by builder and is complete:
+
+| File | Status | Notes |
 | --- | --- | --- |
-| `ARCHITECTURE.md` | created | System architecture diagram with Mermaid graphs, module reference, function call graph, and data flow |
-| `pyproject.toml` | created | Package metadata with description field |
+| `R/probit_mle.R` | Complete | All params, return value, runnable example with set.seed |
+| `R/probit_gibbs.R` | Complete | All params including Nullable priors, return value, example |
+| `R/probit_mh.R` | Complete | All params, scale default documented as 2.4, MLE init note, example |
+| `R/exampleProbit-package.R` | Complete | Package-level docs, useDynLib, importFrom |
+| `man/probit_mle.Rd` | Generated | Via roxygen2 |
+| `man/probit_gibbs.Rd` | Generated | Via roxygen2 |
+| `man/probit_mh.Rd` | Generated | Via roxygen2 |
+| `man/exampleProbit-package.Rd` | Generated | Via roxygen2 |
 
-### Docstring Coverage
+No additional documentation changes needed. All exported functions are documented with parameters, return values, and runnable examples.
 
-All public-facing functions have complete docstrings with Parameters, Returns, and description sections:
+---
 
-| Module | Function | Docstring | Parameters Documented | Returns Documented |
-| --- | --- | --- | --- | --- |
-| `core.py` | `interflex()` | complete | all 24 parameters | yes (dict structure) |
-| `linear.py` | `interflex_linear()` | complete | all parameters | yes |
-| `effects.py` | `compute_effects()` | complete | all parameters | yes (dict keys by treat_type) |
-| `effects.py` | `_get_coef()` | complete | key, coef_dict | yes |
-| `variance.py` | `compute_delta_variance()` | complete | all parameters | yes (dict keys) |
-| `variance.py` | `compute_base_delta_variance()` | complete | all parameters | yes |
-| `variance.py` | `_build_gradient_vector()` | complete | all parameters + mode enum | yes (tuple) |
-| `vcov.py` | `compute_vcov()` | complete | model, vcov_type, cl_vector | yes |
-| `vcov.py` | `vcov_cluster()` | complete | model, cluster | yes |
-| `average.py` | `compute_ate()` | complete | all parameters | yes (float or dict) |
+## Doc Generation Commands
 
-### Documentation Generation Commands
+No doc generation commands need to be run by shipper. The builder already ran `devtools::document()` which generated NAMESPACE and all man/*.Rd files. The package builds and checks successfully.
 
-No documentation generation commands are needed. The package does not use Sphinx, mkdocs, or other doc generators. Users can access documentation via Python's built-in `help()` function or IDE tooltips.
+---
 
-### Deferred Items
+## Deferred Items
 
-1. **README.md**: A user-facing README with installation instructions, quick-start examples, and API reference could be created in a future docs-only workflow. The current `ARCHITECTURE.md` serves as the primary structural documentation.
+None. All documentation is complete for this greenfield package.
 
-2. **Sphinx/mkdocs setup**: For a more polished documentation site, a Sphinx or mkdocs configuration could be added with autodoc to generate API reference from the docstrings.
+---
 
-3. **Usage examples**: Standalone example scripts demonstrating common use cases (binary treatment, continuous treatment, clustered data, bootstrap inference) would benefit users. These could be added as a `examples/` directory.
+## ARCHITECTURE.md Confirmation
 
-### ARCHITECTURE.md Confirmation
-
-ARCHITECTURE.md was produced and written to both locations:
-- Target repo root: `.repos/example-probit/ARCHITECTURE.md`
-- Run directory: `runs/20260331-interflex-py-224717/ARCHITECTURE.md`
+ARCHITECTURE.md was produced and written to both required locations (target repo root and run directory). It contains: Module Structure diagram, Function Call Graph, Data Flow diagram, reference tables, mathematical foundations, simulation design, and architectural patterns.
