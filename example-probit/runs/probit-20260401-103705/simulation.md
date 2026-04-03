@@ -149,4 +149,4 @@ Criteria can only be fully evaluated after the simulation runs (tester's job).
 
 ## 6. Verdict
 
-**SIMULATED** -- Simulation code written. Both files are syntactically valid R that follows the exact estimator interfaces from sim-spec.md. Smoke run deferred to tester (package not yet installable while builder runs in parallel with simulator). All acceptance criteria are measurable from the output.
+**SIMULATED** -- Simulation code written. Both files are syntactically valid R that follows the exact estimator interfaces from sim-spec.md. Smoke run deferred to tester (package not yet installable during parallel dispatch). All acceptance criteria are measurable from the output.

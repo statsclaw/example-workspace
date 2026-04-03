@@ -42,7 +42,7 @@ r-package
 | reviewer | Cross-compare pipeline outputs, verify graph-theoretic correctness |
 
 ## Workflow
-Workflow 1 (Code Change): `leader → planner → builder → tester → scriber → reviewer`
+Workflow 1 (Code Change): `leader → planner → [builder ∥ tester] → scriber → reviewer`
 
 ## Write Surface
 

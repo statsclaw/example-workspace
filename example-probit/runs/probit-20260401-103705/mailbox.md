@@ -30,7 +30,7 @@ Simulator must implement the Monte Carlo simulation study with DGP Phi(-1 + 0.5*
 - The simulation calls `probit_mle(X, y, max_iter, tol)`, `probit_gibbs(X, y, n_iter, burn_in, beta0, Sigma0)`, and `probit_mh(X, y, n_iter, burn_in, scale, beta0, Sigma0)` exactly as specified in sim-spec.md Section 2.
 - If builder changes the function signatures, the simulation script will fail with clear errors from `tryCatch()`.
 - The `run_probit_simulation()` function in `R/simulate_probit.R` can be used programmatically for testing with reduced R (e.g., R=10).
-- Smoke run was deferred because the package is being built by builder in parallel with simulator. Tester should install the package first, then run the simulation.
+- Smoke run was deferred because the package is being built in parallel. Tester should install the package first, then run the simulation.
 - Raw results RDS file includes both raw per-replication data and the summary table, plus all configuration parameters for audit.
 
 ## BLOCK Signal (from tester)
