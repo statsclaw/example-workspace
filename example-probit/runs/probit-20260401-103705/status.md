@@ -22,7 +22,7 @@ CREDENTIALS_VERIFIED → NEW → PLANNED → SPEC_READY → PIPELINES_COMPLETE �
 
 - `SPEC_READY` requires `comprehension.md`, `spec.md`, `test-spec.md`, AND `sim-spec.md` from planner
 - `PIPELINES_COMPLETE` requires `implementation.md` (builder), `audit.md` (tester), AND `simulation.md` (simulator)
-- Builder, tester, and simulator run in parallel after SPEC_READY
+- Builder and simulator run in parallel after SPEC_READY; tester runs after both complete
 
 ## Ownership Ledger
 

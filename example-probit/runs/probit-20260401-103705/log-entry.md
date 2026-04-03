@@ -79,7 +79,7 @@ Built the `exampleProbit` R package from scratch, implementing three probit mode
 - Each estimator call wrapped in tryCatch() for error handling; failures recorded as NA
 - CI construction: asymptotic for MLE (beta +/- 1.96*SE), quantile-based for Gibbs/MH
 - Progress messages every 100 replications
-- Smoke run deferred to tester due to parallel dispatch
+- Smoke run deferred to tester (builder and simulator run in parallel; package not installable until builder completes)
 
 ### Validation Results (from tester)
 

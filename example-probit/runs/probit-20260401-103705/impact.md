@@ -10,7 +10,7 @@ Greenfield R package build: `exampleProbit` — three probit estimation methods 
 - Builder: implements the R package structure and C++ estimators
 - Simulator: implements the DGP and simulation harness
 - Tester: validates both unit tests and simulation results
-- All three dispatched in parallel after planner produces specs
+- Builder and simulator dispatched in parallel after planner produces specs; tester dispatched after both complete
 
 ## Target Repository State
 

@@ -86,4 +86,4 @@ README.md
 
 ## Workflow
 
-Workflow 2 (Code + Ship): `leader → planner → [builder ∥ tester] → scriber → reviewer → shipper`
+Workflow 2 (Code + Ship): `leader → planner → builder → tester → scriber → reviewer → shipper`
